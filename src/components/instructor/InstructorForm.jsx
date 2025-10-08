@@ -38,7 +38,6 @@ const InstructorForm = () => {
     } else if (form.mode === "add") {
       setPreview(null);
     }
-    console.log(form.data);
   }, [form.data]);
 
   const handleChange = (e) => {
@@ -71,7 +70,6 @@ const InstructorForm = () => {
     }));
 
     const newErrors = {};
-    console.log(form.data.profilePictureURL);
 
     if (!formData.fullName) newErrors.fullName = "Full name is required.";
     if (!form.data.profilePictureURL && !formData.ImageFile)

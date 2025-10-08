@@ -17,7 +17,7 @@ const DeleteInstructor = () => {
         deleteDialog.instructorId
       );
 
-      console.log(response);
+ 
 
       setInstructors((prev) => ({
         ...prev,

@@ -94,7 +94,7 @@ const CourseForm = () => {
                 : [{ name: "", LectureNumber: 1, DurationInMinutes: 1 }],
           };
 
-          console.log("Mapped data:", editData);
+         
           setFormData(editData);
 
           if (responseData.coverURL && responseData.coverURL !== "path/path") {
@@ -318,7 +318,7 @@ const CourseForm = () => {
           );
         });
 
-      console.log("Form mode:", form.mode);
+    
 
       let data;
       if (form.mode === "add") {
@@ -332,7 +332,7 @@ const CourseForm = () => {
         if (!form.data?.id) {
           throw new Error("No course ID provided for update");
         }
-        console.log("Updating course with ID:", form.data.id);
+      
         data = await CourseService.updateCourse(form.data.id, fd);
         setCourses((prev) => ({
           ...prev,

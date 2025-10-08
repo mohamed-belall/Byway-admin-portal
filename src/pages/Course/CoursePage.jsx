@@ -34,22 +34,19 @@ const Coursepage = () => {
     const fetchCategory = async () => {
       const response = await CourseService.getCategories();
       setCategory(response);
-      console.log(response);
     };
     fetchCategory();
   }, []);
 
   useEffect(() => {
     fetchCorses();
-    console.log(courses);
   }, [filters]);
-
 
   const fetchCorses = async () => {
     setCourses((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const data = await CourseService.getCourses(filters);
-      console.log(data);
+
       setCourses({
         items: data.data,
         totalCount: data.count,
@@ -58,8 +55,6 @@ const Coursepage = () => {
       });
     } catch (e) {
       setCourses((prev) => ({ ...prev, loading: false, error: e.message }));
-    } finally {
-      console.log(filters);
     }
   };
 
@@ -73,7 +68,6 @@ const Coursepage = () => {
     });
   };
   const handleView = (courseId) => {
-    console.log(courseId);
     setViewModal({
       open: true,
       courseId,
@@ -100,7 +94,6 @@ const Coursepage = () => {
   };
 
   const handleCategoryChange = (e) => {
-    // const categoryId = parseInt(e.target.value);
     const categoryId = parseInt(e);
     setSelectedCategory(categoryId);
     setFilters((prev) => ({
@@ -108,7 +101,6 @@ const Coursepage = () => {
       categoryId: isNaN(categoryId) ? null : categoryId,
       pageIndex: 1,
     }));
-    console.log(categoryId);
   };
 
   return (

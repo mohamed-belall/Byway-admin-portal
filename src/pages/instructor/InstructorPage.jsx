@@ -46,7 +46,6 @@ const Instructorpage = () => {
 
   useEffect(() => {
     fetchInstructors();
-    console.log(instructors);
   }, [filters]);
 
   const handleSearch = (e) => {

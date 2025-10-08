@@ -2,9 +2,9 @@ import api from "./api";
 
 const authService = {
   login: async (credentials) => {
-    console.log(credentials);
+   
     const response = await api.post("/Account/loginAdmin", credentials);
-    console.log(response);
+    
 
     if (!response.data.success) {
       throw new Error(response.data.message || "Login failed");

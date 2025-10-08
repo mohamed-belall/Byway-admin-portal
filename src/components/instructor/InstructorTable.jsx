@@ -55,7 +55,6 @@ const InstructorTable = ({ instructors, onView, onEdit }) => {
                 <button
                   className="text-red-500   text-xl  hover:scale-130 transition"
                   onClick={() => {
-                    console.log(inst.id);
                     setDeleteDialog({
                       open: true,
                       instructorId: inst.id,

@@ -6,8 +6,6 @@ const ProtectedRoute = ({ children }) => {
   const [auth] = useAtom(authAtom);
   const location = useLocation();
 
-  console.log(auth);
-
   if (!auth.isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

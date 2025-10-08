@@ -23,7 +23,7 @@ export const Login = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    console.log(auth);
+
     try {
       const data = await authService.login(formData);
       setAuth({

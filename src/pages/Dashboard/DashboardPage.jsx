@@ -25,7 +25,7 @@ const DashboardPage = () => {
   const [dashboardData, setDashboardData] = useAtom(DashboardAtom);
   const fetchDashboardData = async () => {
     const data = await DashboardService.getDashboardData();
-    console.log(data);
+
     setDashboardData({
       instructorsCount: data.instructorsCount,
       studentsCount: data.studentsCount,
