@@ -15,6 +15,7 @@ import {
   TrashIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
+import LoadingSpinner from "../common/Spinner/LoadingSpinner";
 
 const CourseForm = () => {
   const [form, setForm] = useAtom(CourseFormAtom);
@@ -96,6 +97,7 @@ const CourseForm = () => {
 
          
           setFormData(editData);
+          
 
           if (responseData.coverURL && responseData.coverURL !== "path/path") {
             setPreview(responseData.coverURL);
@@ -133,6 +135,9 @@ const CourseForm = () => {
     }
   }, [form.mode, form.data, form.open]);
 
+
+  useEffect(() => {console.log(formData);} , [formData]);
+
   const fetchInstructorAndCategories = async () => {
     setCourses((prev) => ({ ...prev, loading: true, error: null }));
 
@@ -140,6 +145,7 @@ const CourseForm = () => {
     setCategories(data.categories);
     setInstructors(data.instructors);
     setCourses((prev) => ({ ...prev, loading: false, error: null }));
+    // setFormData((prev) => ({ ...prev,  }));
   };
 
   useEffect(() => {
@@ -874,17 +880,17 @@ const CourseForm = () => {
             type="submit"
             disabled={form.loading}
             className={`px-6 py-2 text-sm font-semibold text-white ${
-              form.loading ? "bg-gray-400" : "bg-gray-900"
+              form.loading ? "flex justify-center bg-gray-400" : "bg-gray-900"
             } rounded-lg hover:bg-gray-800 focus:outline-none`}
           >
             {currentStep === 1
               ? "Next"
               : form.mode === "edit"
               ? form.loading
-                ? "Updating ...."
+                ? <LoadingSpinner />
                 : "Update"
               : form.loading
-              ? "Adding ..."
+              ? <LoadingSpinner />
               : "Add"}
           </button>
         </div>

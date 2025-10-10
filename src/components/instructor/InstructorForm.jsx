@@ -10,6 +10,7 @@ import { Camera } from "lucide-react";
 import { FaUserCircle } from "react-icons/fa";
 
 import { MdErrorOutline } from "react-icons/md";
+import LoadingSpinner from "../common/Spinner/LoadingSpinner";
 
 const InstructorForm = () => {
   const [form, setForm] = useAtom(instructorFormAtom);
@@ -72,7 +73,7 @@ const InstructorForm = () => {
     const newErrors = {};
 
     if (!formData.fullName) newErrors.fullName = "Full name is required.";
-    if (!form.data.profilePictureURL && !formData.ImageFile)
+    if (!form?.data?.profilePictureURL && !formData?.ImageFile)
       newErrors.ImageFile = "profile picture is required.";
     if (formData.jobTitle === null || formData.jobTitle === "")
       newErrors.jobTitle = "Please select a job title.";
@@ -315,10 +316,10 @@ const InstructorForm = () => {
           <button
             type="submit"
             disabled={form.loading}
-            className="flex-1 rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="flex-1 flex justify-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
           >
             {form.loading
-              ? "Saving..."
+              ? <LoadingSpinner />
               : form.mode === "add"
               ? "Add"
               : "Update"}

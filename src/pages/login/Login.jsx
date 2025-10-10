@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { authAtom, loadingAtom } from "../../atoms/auth";
 import { useEffect, useState } from "react";
 import lmsImage from "../../assets/lms.jpg";
+import LoadingSpinner from "../../components/common/Spinner/LoadingSpinner";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -96,10 +97,10 @@ export const Login = () => {
               type="submit"
               disabled={loading}
               className={`w-full ${
-                loading ? "bg-black/50" : "bg-black cursor-pointer"
+                loading ?  "flex justify-center bg-black/50" : "bg-black cursor-pointer"
               } text-white py-2 rounded-md font-medium hover:bg-gray-800 transition`}
             >
-              {loading ? "Sing In in progress..." : "Sign In →"}
+              {loading ? <LoadingSpinner /> : "Sign In →"}
             </button>
           </form>
 
