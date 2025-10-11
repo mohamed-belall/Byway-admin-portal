@@ -6,6 +6,7 @@ import {
   CourseFiltersAtom,
   CourseFormAtom,
   CoursesAtom,
+  LevelAtom,
 } from "../../atoms/CourseAtom";
 import Modal from "../common/Modal";
 import CourseService from "../../services/CourseService";
@@ -21,6 +22,7 @@ const CourseForm = () => {
   const [form, setForm] = useAtom(CourseFormAtom);
   const [filters, setFilters] = useAtom(CourseFiltersAtom);
   const [, setCourses] = useAtom(CoursesAtom);
+  const [level , setLevel] = useAtom(LevelAtom);
   const [categories, setCategories] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
@@ -73,12 +75,14 @@ const CourseForm = () => {
             title: responseData.title || "",
             description: responseData.description || "",
             imageFile: null,
-            level: responseData.level || 0,
+            level: responseData.levelId || 0,
             rate: responseData.rate || 1,
             cirtification:
               responseData.cirtification || responseData.certification || "",
             cost: responseData.cost || 0,
+            categoryId: responseData.categoryId || 0,
             categoryName: responseData.categoryName || "",
+            instructorId: responseData.instructorId || 0,
             instructorName: responseData.instructorName || "",
             totalHours: responseData.totalHours || "",
             contents:
@@ -612,11 +616,20 @@ const CourseForm = () => {
                   } px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
                   required
                 >
-                  <option value="">Choose</option>
-                  <option value={0}>Beginner</option>
-                  <option value={1}>Intermediate</option>
-                  <option value={2}>Advanced</option>
-                  <option value={3}>All Levels</option>
+                  <option  value="">Choose</option>
+                  {
+
+                  level.map((l , index) => (
+                      <option
+                      key={index}
+                      value={l.id}
+                      selected={
+                        formData.level === l.id
+                      }
+                    >
+                      {l.name}
+                    </option>
+                  ))}
                 </select>
                 {errors.level && (
                   <p className="mt-1 text-xs text-red-600 flex items-center gap-1">

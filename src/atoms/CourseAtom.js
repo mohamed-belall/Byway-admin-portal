@@ -36,3 +36,11 @@ export const deleteDialogAtom = atom({
   loading: false,
   error: null,
 });
+
+
+export const LevelAtom = atom([
+  {id : 0 , name: "Beginner" },
+  {id : 1 , name: "Intermediate" },
+  {id : 2 , name: "Advanced" },
+  {id : 3 , name: "All Levels" }, 
+]);

@@ -46,3 +46,12 @@ export const instructorFormAtom = atom({
 });
 
 
+
+export const JobTitleAtom = atom([
+
+  {id : 0 , name: "FullstackDeveloper" },
+  {id : 1 , name: "BackendDeveloper" },
+  {id : 2 , name: "FrontendDeveloper" },
+  {id : 3 , name: "UXUIDesigner" }, 
+]);
+

@@ -148,7 +148,7 @@ const ViewCourse = ({ isOpen, onClose, courseId }) => {
                     Level
                   </label>
                   <div className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
-                    {getLevelText(course.level)}
+                    {course.level}
                   </div>
                 </div>
               </div>

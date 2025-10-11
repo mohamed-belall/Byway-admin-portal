@@ -1,6 +1,7 @@
 import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
 import {
+  JobTitleAtom,
   instructorFormAtom,
   instructorsAtom,
 } from "../../atoms/instructorAtom";
@@ -15,6 +16,7 @@ import LoadingSpinner from "../common/Spinner/LoadingSpinner";
 const InstructorForm = () => {
   const [form, setForm] = useAtom(instructorFormAtom);
   const [, setInstructors] = useAtom(instructorsAtom);
+  const [jobtitle] = useAtom(JobTitleAtom);
   const [formData, setFormData] = useState({
     fullName: "",
     bio: "",
@@ -32,14 +34,34 @@ const InstructorForm = () => {
 
   useEffect(() => {
     if (form.mode === "edit" && form.data) {
-      setFormData(form.data);
+      const job = jobtitle.find((j) => j.name === form.data.jobTitle);
+      setFormData({
+        ...form.data,
+        jobTitle: job ? job.id : "",
+      });
+  
       if (form.data.profilePictureURL) {
         setPreview(form.data.profilePictureURL);
       }
     } else if (form.mode === "add") {
       setPreview(null);
+      setFormData({
+        fullName: "",
+        bio: "",
+        ImageFile: null,
+        rate: 0,
+        jobTitle: "",
+      });
     }
-  }, [form.data]);
+  
+    console.log("form", form.data);
+  }, [form.data, form.mode, jobtitle]);
+  
+
+  useEffect(() => {
+  
+    console.log("form data" , formData);
+  }, [formData] );
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -262,10 +284,18 @@ const InstructorForm = () => {
               } px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
             >
               <option value="">Choose a job title</option>
-              <option value={0}>Fullstack Developer</option>
-              <option value={1}>Backend Developer</option>
-              <option value={2}>Frontend Developer</option>
-              <option value={3}>UXUI Designer</option>
+              
+              {
+                jobtitle.map((jt , index) => (
+                  <option
+                  key={index}
+                  value={jt.id}
+                  // selected={ formData.jobTitle === jt.name }
+                  >
+                    {jt.name}
+                  </option>
+                ))
+              }
             </select>
             {errors.jobTitle && (
               <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
